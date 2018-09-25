@@ -20,6 +20,8 @@ import os
 
 PATH = 'segmentation_WBC-master/'
 all_files = next(os.walk(PATH+'Dataset 1'))[2]
+img = color.rgb2hsv(imread(PATH+'Dataset 1/'+'003.bmp'))
+
 for file in all_files:
     if file.find('.bmp') > 0:
         img = color.rgb2grey(imread('segmentation_WBC-master/Dataset 1/'+file))
