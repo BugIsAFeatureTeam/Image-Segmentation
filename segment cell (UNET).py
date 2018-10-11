@@ -110,7 +110,7 @@ class DominantColors:
 #        return self.CLUSTERS
 
 
-PATH = 'segmentation_WBC-master/'
+PATH = 'segmentation_WBC-master/Fulltest2/set4/'
         
 ip = PATH+'compare/'
 orig = PATH+'testset/'
@@ -146,7 +146,9 @@ for idx in range (len(all_files)):
                 if opened[i][j] <200:
                     opened[i][j] =0
         opened = opened.astype(bool)
-        opened = remove_small_objects(opened, 400)
+        opened = closing(opened, square(2))
+        
+        opened = remove_small_objects(opened, 200)
         opened = remove_small_holes(opened,1600)
         
         img = cv2.imread(orig+str(orig_files[idx]))
@@ -157,7 +159,7 @@ for idx in range (len(all_files)):
                 if opened[i][j] ==0 :
                     img[i][j] = 0
                     
-        imsave(PATH+'/segment/'+all_files[idx]+'.png',img)
+        imsave(PATH+all_files[idx]+'.png',img)
 
 
 
